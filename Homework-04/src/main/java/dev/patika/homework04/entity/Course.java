@@ -21,7 +21,7 @@ public class Course extends AbstractBaseEntity{
     private String courseCode;
     private int credit;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
     @Builder.Default
     @JoinTable(
             name = "Course_Student",

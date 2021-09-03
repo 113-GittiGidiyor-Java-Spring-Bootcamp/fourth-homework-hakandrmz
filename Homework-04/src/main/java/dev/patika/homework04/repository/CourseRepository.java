@@ -15,4 +15,5 @@ public interface CourseRepository extends CrudRepository<Course,Long> {
     List<Course> search(String word);
 
     Course findCourseByCourseCode(String word);
+
 }

@@ -8,6 +8,9 @@ import dev.patika.homework04.entity.Student;
 import dev.patika.homework04.service.CourseService;
 import dev.patika.homework04.service.InstructorService;
 import dev.patika.homework04.service.StudentService;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,15 +20,10 @@ import java.util.List;
 
 @Component
 public class DataLoader implements CommandLineRunner {
-    private final CourseService courseService;
-    private final StudentService studentService;
-    private final InstructorService instructorService;
-
-    public DataLoader(CourseService courseService, StudentService studentService, InstructorService instructorService) {
-        this.courseService = courseService;
-        this.studentService = studentService;
-        this.instructorService = instructorService;
-    }
+    @Autowired
+    private CourseService courseService;
+    @Autowired
+    private InstructorService instructorService;
 
     @Override
     public void run(String... args) throws Exception {

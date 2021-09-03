@@ -17,7 +17,7 @@ public class InstructorService {
 
     @Autowired
     private InstructorRepository instructorRepository;
-    @Autowired
+    @Autowired(required = false)
     private InstructorMapper instructorMapper;
 
     public List<Instructor> findAll() {
@@ -54,14 +54,10 @@ public class InstructorService {
         instructorRepository.deleteById(id);
     }
 
-    public void update(Instructor instructor) {
-        Instructor foundInstructor = instructorRepository.findById(instructor.getId()).orElseThrow(() -> new IllegalArgumentException("Invalid student id :" + instructor.getId()));
-        foundInstructor.setName(instructor.getName());
-        foundInstructor.setAddress(instructor.getAddress());
-        foundInstructor.setPhoneNumber(instructor.getPhoneNumber());
-        foundInstructor.setSalary(instructor.getSalary());
-        foundInstructor.setType(instructor.getType());
-        instructorRepository.save(instructor);
+    public void update(InstructorDTO instructorDTO) {
+        Instructor instructorWillUpdate = instructorRepository.findById(instructorDTO.getId()).orElseThrow(()-> new IllegalArgumentException("there is no instructor with this id"));
+        Instructor instructor = instructorMapper.mapFromInstructorDTOtoInstructor(instructorDTO);
+
     }
 
     public List<Instructor> search(String word) {

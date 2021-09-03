@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication(scanBasePackages = {"dev.patika.homework04.mappers"})
+@SpringBootApplication
 @EnableSwagger2
 public class Homework04Application {
 

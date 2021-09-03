@@ -15,6 +15,9 @@ import javax.persistence.Enumerated;
 @NoArgsConstructor
 public class InstructorDTO {
 
+    @ApiModelProperty(hidden = true)
+    private long id;
+
     @ApiModelProperty(example = "Hakan")
     private String name;
 
