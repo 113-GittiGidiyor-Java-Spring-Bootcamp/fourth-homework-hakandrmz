@@ -4,6 +4,7 @@ import dev.patika.homework04.dto.InstructorDTO;
 import dev.patika.homework04.entity.Instructor;
 import dev.patika.homework04.entity.Log;
 import dev.patika.homework04.exception.InstructorIsAlreadyExistException;
+import dev.patika.homework04.exception.InstructorIsNotExistException;
 import dev.patika.homework04.mappers.InstructorMapper;
 import dev.patika.homework04.repository.InstructorRepository;
 import dev.patika.homework04.utils.ErrorMessageConstants;
@@ -28,16 +29,22 @@ public class InstructorService {
         return instructorRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid student id :" + id));
     }
 
-    public Instructor save(InstructorDTO instructorDTO) {
+    public String save(InstructorDTO instructorDTO) {
         if(this.isExistOnDatabase(instructorDTO.getPhoneNumber())){
-            Instructor instructor = instructorMapper.mapFromInstructorDTOtoInstructor(instructorDTO);
-            instructorRepository.save(instructor);
-            return instructor;
-        }else {
             throw new InstructorIsAlreadyExistException(ErrorMessageConstants.INSTRUCTOR_PHONE_NUMBER_MUST_BE_UNIQUE);
+        }else {
+            Instructor instructor = new Instructor();
+            instructorMapper.updateInstructorFromDto(instructorDTO,instructor);
+            instructorRepository.save(instructor);
+            return "Instructor with id:" + instructorDTO.getId() + " saved";
         }
     }
 
+    /**
+     * Method that saves the instructor to database for data loader
+     * @param instructor
+     * @return Saved Instructor Object
+     */
     public Instructor save(Instructor instructor) {
         return instructorRepository.save(instructor);
     }
@@ -55,9 +62,11 @@ public class InstructorService {
     }
 
     public void update(InstructorDTO instructorDTO) {
-        Instructor instructorWillUpdate = instructorRepository.findById(instructorDTO.getId()).orElseThrow(()-> new IllegalArgumentException("there is no instructor with this id"));
-        Instructor instructor = instructorMapper.mapFromInstructorDTOtoInstructor(instructorDTO);
-
+        Instructor instructor = instructorRepository.findById(instructorDTO
+                .getId())
+                .orElseThrow(() -> new InstructorIsNotExistException(ErrorMessageConstants.INSTRUCTOR_IS_NOT_EXIST));
+        instructorMapper.updateInstructorFromDto(instructorDTO,instructor);
+        instructorRepository.save(instructor);
     }
 
     public List<Instructor> search(String word) {

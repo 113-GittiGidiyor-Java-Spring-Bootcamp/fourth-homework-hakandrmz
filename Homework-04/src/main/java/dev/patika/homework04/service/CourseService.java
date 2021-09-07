@@ -34,6 +34,11 @@ public class CourseService {
         return courseRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid course id :" + id));
     }
 
+    /**
+     *
+     * @param courseDTO
+     * @return
+     */
     @Transactional
     public String save(CourseDTO courseDTO) {
         boolean isExist = this.isCourseExistOnDatabase(courseDTO.getCourseCode());

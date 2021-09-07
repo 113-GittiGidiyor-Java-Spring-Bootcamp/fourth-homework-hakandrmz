@@ -5,4 +5,5 @@ public interface ErrorMessageConstants {
     public static final String INSTRUCTOR_PHONE_NUMBER_MUST_BE_UNIQUE = "Instructor number must be unique";
     public static final String COURSE_IS_ALREADY_EXIST = "Course with this course code is already exist";
     public static final String STUDENT_NUMBER_FOR_ONE_COURSE_EXCEED = "Student number of course must be less than 20";
+    public static final String INSTRUCTOR_IS_NOT_EXIST = "Instructor is not exist";
 }

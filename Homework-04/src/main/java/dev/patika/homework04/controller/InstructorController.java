@@ -26,23 +26,24 @@ public class InstructorController {
         return new ResponseEntity(instructorService.findById(id),HttpStatus.OK);
     }
 
-    //TODO
     @PostMapping("instructor/add")
     public ResponseEntity<InstructorDTO> addNewInstructor(@RequestBody InstructorDTO instructorDTO){
         instructorService.save(instructorDTO);
-        return new ResponseEntity(instructorService.save(instructorDTO),HttpStatus.OK);
+        return new ResponseEntity("Instructor added to database",HttpStatus.OK);
+    }
+
+    @DeleteMapping("instructor/delete/{id}")
+    public ResponseEntity<String> deleteInstructorById(@PathVariable long id){
+        instructorService.deleteById(id);
+        return new ResponseEntity<>("Instructed with id " + id + " deleted",HttpStatus.OK);
     }
 
     //TODO
     @PutMapping("instructor/update")
-    public ResponseEntity<InstructorDTO> updateInstructor(@RequestBody InstructorDTO instructorDTO){
+    public ResponseEntity<String> updateInstructor(@RequestBody InstructorDTO instructorDTO){
         instructorService.update(instructorDTO);
-        return new ResponseEntity(instructorDTO, HttpStatus.OK);
+        return new ResponseEntity("Instructor updated with id: " + instructorDTO.getId(), HttpStatus.OK);
     }
 
-    @DeleteMapping("instructor/delete/{id}")
-    public ResponseEntity<InstructorDTO> deleteInstructorById(@PathVariable long id){
-        instructorService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+
 }

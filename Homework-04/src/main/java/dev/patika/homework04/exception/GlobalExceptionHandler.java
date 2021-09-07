@@ -37,6 +37,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler({InstructorIsNotExistException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<AppErrorResponse> handleException(InstructorIsNotExistException exc){
+        AppErrorResponse response = prepareErrorResponse(HttpStatus.BAD_REQUEST,exc.getMessage());
+        return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
+    }
+
     private AppErrorResponse prepareErrorResponse(HttpStatus httpStatus, String message) {
         AppErrorResponse response = new AppErrorResponse();
         response.setStatus(httpStatus.value());
