@@ -38,12 +38,10 @@ public class InstructorController {
         return new ResponseEntity<>("Instructed with id " + id + " deleted",HttpStatus.OK);
     }
 
-    //TODO
     @PutMapping("instructor/update")
     public ResponseEntity<String> updateInstructor(@RequestBody InstructorDTO instructorDTO){
         instructorService.update(instructorDTO);
         return new ResponseEntity("Instructor updated with id: " + instructorDTO.getId(), HttpStatus.OK);
     }
-
 
 }
