@@ -26,32 +26,36 @@ public class StudentController {
         return new ResponseEntity(studentService.findById(id),HttpStatus.OK);
     }
 
+    @DeleteMapping("student/delete/{id}")
+    public ResponseEntity<String> deleteStudentById(@PathVariable long id){
+        studentService.deleteById(id);
+        return new ResponseEntity<>("Student with id: " + id + " deleted",HttpStatus.OK);
+    }
+
     @PostMapping("student/add")
     public ResponseEntity<StudentDTO> addNewStudent(@RequestBody StudentDTO studentDTO){
         studentService.save(studentDTO);
         return new ResponseEntity("Student Added",HttpStatus.OK);
     }
 
-    //TODO
     @PutMapping("student/update")
     public ResponseEntity<StudentDTO> updateStudent(@RequestBody StudentDTO studentDTO){
         studentService.update(studentDTO);
         return new ResponseEntity(studentDTO, HttpStatus.OK);
     }
 
-    @DeleteMapping("student/delete/{id}")
-    public ResponseEntity<StudentDTO> deleteStudentById(@PathVariable long id){
-        studentService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    //TODO
     @PostMapping("student/add/{courseId}")
     public ResponseEntity<StudentDTO> addAStudentToAnExistingCourse(@PathVariable long courseId,
                                                                     @RequestBody StudentDTO studentDTO){
         studentService.addAStudentToAnExistingCourse(courseId,studentDTO);
         return new ResponseEntity(String.format("Student with %d id added to %s",studentDTO.getId(),courseId), HttpStatus.OK);
     }
+
+    @GetMapping("students/search/{keyword}")
+    public ResponseEntity<StudentDTO> searchStudent(@PathVariable String keyword){
+        return new ResponseEntity(studentService.search(keyword),HttpStatus.OK);
+    }
+
 }
 
 

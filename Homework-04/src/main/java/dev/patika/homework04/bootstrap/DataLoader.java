@@ -18,6 +18,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * method for saving some data on start
+ */
 @Component
 public class DataLoader implements CommandLineRunner {
     @Autowired

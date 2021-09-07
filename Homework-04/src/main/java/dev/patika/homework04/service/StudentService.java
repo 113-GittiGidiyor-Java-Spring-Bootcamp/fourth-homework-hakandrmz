@@ -4,15 +4,14 @@ import dev.patika.homework04.dto.StudentDTO;
 import dev.patika.homework04.entity.Course;
 import dev.patika.homework04.entity.Log;
 import dev.patika.homework04.entity.Student;
-import dev.patika.homework04.exception.StudentAgeNotValidException;
-import dev.patika.homework04.exception.StudentNotFoundException;
-import dev.patika.homework04.exception.StudentNumberForOneCourseExceededException;
+import dev.patika.homework04.exception.*;
 import dev.patika.homework04.mappers.StudentMapper;
 import dev.patika.homework04.repository.CourseRepository;
 import dev.patika.homework04.repository.LogRepository;
 import dev.patika.homework04.repository.StudentRepository;
 import dev.patika.homework04.utils.ErrorMessageConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,45 +45,12 @@ public class StudentService {
     }
 
     @Transactional
-    public Optional<StudentDTO> save(StudentDTO studentDTO) {
-        Student student = studentMapper.mapFromStudentDTOtoStudent(studentDTO);
-        if(validateStudentAge(studentDTO)){
-            studentRepository.save(student);
-        }else {
-            logRepository.save(Log.builder().type(ErrorMessageConstants.STUDENT_AGE_NOT_VALID)
-                    .info("Student age is not valid to save")
-                    .build());
-            throw new StudentAgeNotValidException(ErrorMessageConstants.STUDENT_AGE_NOT_VALID);
+    public void deleteById(long id) {
+        try {
+            courseRepository.deleteById(id);
+        }catch (EmptyResultDataAccessException e){
+            throw new StudentNotFoundException(ErrorMessageConstants.STUDENT_IS_NOT_EXIST);
         }
-        return Optional.of(studentMapper.mapFromStudentToStudentDTO(student));
-    }
-
-    public void addAStudentToAnExistingCourse(long courseId, StudentDTO studentDTO ){
-        Course foundCourse = courseRepository.findById(courseId).orElseThrow(() -> new StudentNotFoundException("Student not found with id:"+studentDTO.getId()));
-        int numberOfStudentOfCourse = foundCourse.getStudents().size();
-        if(numberOfStudentOfCourse > 20) {
-            logRepository.save(Log.builder().type(ErrorMessageConstants
-                    .STUDENT_NUMBER_FOR_ONE_COURSE_EXCEED)
-                    .info("A course cannot take more than 20 students")
-                    .build());
-            throw new StudentNumberForOneCourseExceededException(ErrorMessageConstants.STUDENT_NUMBER_FOR_ONE_COURSE_EXCEED);
-        }else {
-            Student student = studentMapper.mapFromStudentDTOtoStudent(studentDTO);
-            foundCourse.getStudents().add(student);
-        }
-    }
-
-    @Transactional
-    public Student deleteById(long id) {
-        Student foundStudent = studentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
-        studentRepository.deleteById(id);
-        return foundStudent;
-    }
-
-    @Transactional
-    public void update(StudentDTO studentDTO) {
-        Student student = studentMapper.mapFromStudentDTOtoStudent(studentDTO);
-        studentRepository.save(student);
     }
 
     @Transactional
@@ -92,15 +58,71 @@ public class StudentService {
         return studentRepository.search(word);
     }
 
+    @Transactional
+    public String save(StudentDTO studentDTO) {
+        if(this.validateStudentAge(studentDTO)){
+            Student student = new Student();
+            studentMapper.updateStudentFromDto(studentDTO,student);
+            studentRepository.save(student);
+            return "Student with id: " + student.getId() + " saved";
+        }else {
+            throw new StudentAgeNotValidException(ErrorMessageConstants.STUDENT_AGE_NOT_VALID);
+        }
+    }
+
+    /**
+     * this method for adding new student to an existing course
+     * if number of student in a course this method throws error
+     * @param courseId
+     * @param studentDTO
+     */
+    @Transactional
+    public void addAStudentToAnExistingCourse(long courseId, StudentDTO studentDTO ){
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new CourseIsNotExistException(ErrorMessageConstants.COURSE_IS_NOT_EXIST));
+        if(course.getStudents().size() >= 20) {
+            throw new StudentNumberForOneCourseExceededException(ErrorMessageConstants.STUDENT_NUMBER_FOR_ONE_COURSE_EXCEED);
+        }else {
+            Student student = new Student();
+            studentMapper.updateStudentFromDto(studentDTO,student);
+            course.getStudents().add(student);
+            courseRepository.save(course);
+        }
+    }
+
+    @Transactional
+    public void update(StudentDTO studentDTO) {
+        if(this.validateStudentAge(studentDTO)){
+            Student student = studentRepository.findById(studentDTO.getId())
+                    .orElseThrow(() -> new StudentNotFoundException(ErrorMessageConstants.STUDENT_IS_NOT_EXIST));
+            studentMapper.updateStudentFromDto(studentDTO,student);
+            studentRepository.save(student);
+        }else {
+            throw new StudentAgeNotValidException(ErrorMessageConstants.STUDENT_AGE_NOT_VALID);
+        }
+    }
+
+    /**
+     * method for checking student age is valid
+     * @param studentDTO
+     * @return true if student age is valid
+     * else return false
+     */
     private boolean validateStudentAge(StudentDTO studentDTO) {
         int studentAge = this.calculateAge(studentDTO.getBirthDate(),LocalDate.now());
-        if(studentAge < 18 && studentAge > 40){
+        if(studentAge < 18 || studentAge > 40){
             return false;
         }else {
             return true;
         }
     }
 
+    /**
+     *method for calculating age
+     * @param birthDate
+     * @param currentDate
+     * @return
+     */
     private int calculateAge(LocalDate birthDate, LocalDate currentDate) {
         if ((birthDate != null) && (currentDate != null)) {
             return Period.between(birthDate, currentDate).getYears();

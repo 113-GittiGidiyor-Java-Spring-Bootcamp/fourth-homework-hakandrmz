@@ -32,14 +32,12 @@ public class CourseController {
         return new ResponseEntity<>("Instructed with id " + id + " deleted",HttpStatus.OK);
     }
 
-    //TODO
-
     @PostMapping("course/add")
     public ResponseEntity<CourseDTO> addNewCourse(@RequestBody CourseDTO courseDTO){
         courseService.save(courseDTO);
-        return new ResponseEntity(courseService.save(courseDTO),HttpStatus.OK);
+        return new ResponseEntity("Course added to database",HttpStatus.OK);
     }
-    //TODO
+
     @PutMapping("course/update")
     public ResponseEntity<CourseDTO> updateCourse(@RequestBody CourseDTO courseDTO){
         courseService.update(courseDTO);

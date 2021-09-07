@@ -11,10 +11,7 @@ import java.util.List;
 @Repository
 public interface LogRepository extends CrudRepository<Log,Long> {
 
-    @Query("SELECT l FROM Log l WHERE l.info LIKE %?1%"
-            +" OR l.type LIKE %?1%")
+    @Query("SELECT l FROM Log l WHERE l.type LIKE %?1%")
     List<Log> search(String word);
-
-
 
 }
