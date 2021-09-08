@@ -9,11 +9,5 @@ import java.util.List;
 
 @Repository
 public interface CourseRepository extends CrudRepository<Course,Long> {
-    @Query("SELECT c FROM Course c WHERE c.name LIKE %?1%"
-            +" OR c.courseCode LIKE %?1%"
-            +" OR c.instructor.name LIKE %?1%")
-    List<Course> search(String word);
-
     Course findCourseByCourseCode(String word);
-
 }

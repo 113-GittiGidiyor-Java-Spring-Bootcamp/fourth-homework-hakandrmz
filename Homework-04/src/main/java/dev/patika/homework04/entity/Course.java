@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Course extends AbstractBaseEntity{
+public class  Course extends AbstractBaseEntity{
 
     private String name;
     private String courseCode;

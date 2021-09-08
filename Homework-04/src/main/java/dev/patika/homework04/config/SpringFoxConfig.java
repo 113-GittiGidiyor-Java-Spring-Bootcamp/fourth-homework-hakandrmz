@@ -8,7 +8,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 /**
- * class that configuration for swagger
+ * configuration class for swagger
  */
 @Configuration
 public class SpringFoxConfig {

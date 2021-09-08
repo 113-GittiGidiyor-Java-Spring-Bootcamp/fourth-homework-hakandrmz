@@ -19,7 +19,7 @@ public class LogController {
 
     /**
      *
-     * @return all the logs from database
+     * @return all logs from database
      */
     @GetMapping("/logs")
     public ResponseEntity<SystemLog> getAllLogs(){
@@ -29,7 +29,7 @@ public class LogController {
     /**
      *
      * @param keyword
-     * @return Returns logs which includes keyword
+     * @return logs which includes keyword
      */
     @GetMapping("/logs/search/{keyword}")
     public ResponseEntity<SystemLog> searchInLogs(@PathVariable String keyword){
