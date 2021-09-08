@@ -2,57 +2,75 @@
 
 ![homework](https://user-images.githubusercontent.com/45206582/131386439-6727321a-5a50-4c20-9413-ea4013013434.PNG)
 
+#Installation and usage
+
+1. git clone https://github.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz.git
+2. cd fourth-homework-hakandrmz/Homework-04
+3. mvn spring-boot:run
+
+#Testing endpoints
+
+http://localhost:8080/swagger-ui.html
+
+h2 database user info: http://localhost:8080/h2-console/
+username: sa
+password: password
+
+# Used for implementation
+
+1. Java 8
+2. H2 Database
+3. Swagger
+4. Maven
+5. Spring Data JPA
+6. Lombok
+7. Mapstruct
+8. Spring Boot
 
 # Folder Structure of Project
 
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/folderstructure1.png?token=AFZA7JNXXZ5XOAKYE5XQQQ3BHCDN4)
+/bootstrap  - load data on start
+/config     - swagger configs
+/controller - endpoints
+/dto        - data between layers
+/entity     - database models
+/exception  - specific exceptions
+/mappers    - dto to entity mapper
+/repository - for CrudRepository
+/service    - service layer between repository and controller 
+/utils      - error message constants
 
-## Checking Validations of Student Controller Class
+# Controller Endpoints
 
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/coursecontrollerinswagger1.png?token=AFZA7JIKUD2B5TBZ4JSW23TBHCC2E)
+POST    /api/course/add 
+DELETE  /api/course/delete/{id}
+PUT     /api/course/update
+GET     /api/courses
+GET     /api/courses/{id}
 
-Checking student age for validation. If student age less then 18 or greater then 40 is invalid student age to save database.
+GET     /logs
+GET     /logs/search/{keyword}
 
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/studentagenotvalidexceiotion1.png?token=AFZA7JNWZPFT3HKNPI56JDTBHCC4K)
+POST    /api/student/add
+POST    /api/student/add/{courseId} 
+DELETE  /api/student/delete/{id}
+PUT     /api/student/update
+GET     /api/students
+GET     /api/students/search/{keyword}
 
-If number of student grater then 20, system throws an exception about this exception.
+POST    /api/instructor/add
+DELETE  /api/instructor/delete/{id}
+PUT     /api/instructor/update
+GET     /api/instructors
+GET     /api/instructors/{id}
 
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/numberofstudentsexception1.png?token=AFZA7JLXP4WUMTO7UF64KILBHCC6Q)
+# Rules of Project
 
-Searching students by name and address
-
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/studentsearch1.png?token=AFZA7JO6C4X3D5QU7F4K7TTBHCC7M)
-
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/studentsearchresult1.png?token=AFZA7JPSOBJSG3T5CP5Y4Y3BHCC7O)
-
-## Checking Validations of Course Controller Class
-
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/coursecontrollerinswagger1.png?token=AFZA7JPWHMPMJLPIS2O66NTBHCDBU)
-
-Exception handler throws an error if there is a course code with the same course code which adding to database.
-
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/coursecodeexception1.png?token=AFZA7JKQ7QVZBOQA5CO3GODBHCDBW)
-
-## Checking Validations of Instructor Controller Class
-
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/instructorcontrolleinswagger1.png?token=AFZA7JI3Y7ACQT7ZREXX7VDBHCDDO)
-
-Instructor phone number must be unique in database.
-
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/instructorphonenumberexception1.png?token=AFZA7JI4TZVP75E7W5Z5V6TBHCDDQ)
-
-
-## Searching in saved logs in database
-
-Log Controller Endpoints
-
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/logcontrollerindatabase1.PNG?token=AFZA7JKNRJQEW2MTHZJ6BULBHCDFA)
-
-Searching in logs
-
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/searchinlogs1.png?token=AFZA7JMZIVC2ZYYP3NQF4M3BHCDFI)
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/searchinlogsresult1.png?token=AFZA7JIUDPGAIIUOZPPEUO3BHCDFK)
+1. Student age must be greater than 18 and less than
+2. Number of students must be less than 20
+3. Instructor phone number must be unique
+4. Course code of course is must be unique
 
 
-Logs in Database
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/logsinh2database1.png?token=AFZA7JMQ3YSJT2ELWIYTP7TBHCDE4)
+
+
