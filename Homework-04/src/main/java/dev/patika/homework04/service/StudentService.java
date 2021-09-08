@@ -2,7 +2,6 @@ package dev.patika.homework04.service;
 
 import dev.patika.homework04.dto.StudentDTO;
 import dev.patika.homework04.entity.Course;
-import dev.patika.homework04.entity.Log;
 import dev.patika.homework04.entity.Student;
 import dev.patika.homework04.exception.*;
 import dev.patika.homework04.mappers.StudentMapper;
@@ -30,8 +29,6 @@ public class StudentService {
     private StudentMapper studentMapper;
     @Autowired
     private CourseRepository courseRepository;
-    @Autowired
-    private LogRepository logRepository;
 
     public List<Student> findAll() {
         return (List<Student>) studentRepository.findAll();

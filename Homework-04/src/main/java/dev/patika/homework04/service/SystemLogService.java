@@ -1,6 +1,6 @@
 package dev.patika.homework04.service;
 
-import dev.patika.homework04.entity.Log;
+import dev.patika.homework04.entity.SystemLog;
 import dev.patika.homework04.repository.LogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class LogService {
+public class SystemLogService {
 
     @Autowired
     private LogRepository logRepository;
@@ -19,7 +19,7 @@ public class LogService {
      * @param log
      */
     @Transactional
-    public void save(Log log){
+    public void save(SystemLog log){
         logRepository.save(log);
     }
 
@@ -27,9 +27,8 @@ public class LogService {
      * for getting all logs exist in database
      * @return
      */
-    @Transactional
-    public List<Log> getAll(){
-        return (List<Log>) logRepository.findAll();
+    public List<SystemLog> getAll(){
+        return (List<SystemLog>) logRepository.findAll();
     }
 
     /**
@@ -38,7 +37,7 @@ public class LogService {
      * @return
      */
     @Transactional
-    public List<Log> search(String word){
+    public List<SystemLog> search(String word){
         return logRepository.search(word);
     }
 

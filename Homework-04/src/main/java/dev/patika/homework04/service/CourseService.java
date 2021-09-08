@@ -2,25 +2,19 @@ package dev.patika.homework04.service;
 
 import dev.patika.homework04.dto.CourseDTO;
 import dev.patika.homework04.entity.Course;
-import dev.patika.homework04.entity.Instructor;
-import dev.patika.homework04.entity.Log;
+import dev.patika.homework04.entity.SystemLog;
 import dev.patika.homework04.exception.CourseIsAlreadyExistException;
 import dev.patika.homework04.exception.CourseIsNotExistException;
-import dev.patika.homework04.exception.InstructorIsNotExistException;
 import dev.patika.homework04.mappers.CourseMapper;
 import dev.patika.homework04.repository.CourseRepository;
 import dev.patika.homework04.repository.LogRepository;
 import dev.patika.homework04.utils.ErrorMessageConstants;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLOutput;
 import java.time.Instant;
 import java.util.List;
 
@@ -32,19 +26,17 @@ public class CourseService {
     private CourseRepository courseRepository;
     @Autowired(required = false)
     private CourseMapper courseMapper;
-    @Autowired
-    private LogService logService;
 
     public List<Course> findAll() {
         return (List<Course>) courseRepository.findAll();
     }
 
     public Course findById(long id) {
-        return courseRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid course id :" + id));
+        return courseRepository.findById(id).orElseThrow(() -> new CourseIsNotExistException(ErrorMessageConstants.COURSE_IS_NOT_EXIST));
     }
 
     /**
-     *gets the course dto from controller
+     * gets the course dto from controller
      * use mapper to map the course from course dto
      * saving the course using repository
      * @param courseDTO
@@ -53,8 +45,6 @@ public class CourseService {
     @Transactional
     public String save(CourseDTO courseDTO) {
         if(this.isCourseExistOnDatabase(courseDTO.getCourseCode())){
-            Log log = new Log(ErrorMessageConstants.COURSE_IS_NOT_EXIST);
-            logService.save(log);
             throw new CourseIsAlreadyExistException(ErrorMessageConstants.COURSE_IS_ALREADY_EXIST);
         }else {
             Course course = new Course();
@@ -89,8 +79,6 @@ public class CourseService {
             courseMapper.updateCourseFromDto(courseDTO,course);
             courseRepository.save(course);
         }else {
-            Log log = new Log(ErrorMessageConstants.COURSE_IS_NOT_EXIST);
-            logService.save(log);
             throw new CourseIsNotExistException(ErrorMessageConstants.COURSE_IS_NOT_EXIST);
         }
     }

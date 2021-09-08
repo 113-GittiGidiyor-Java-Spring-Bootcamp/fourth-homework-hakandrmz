@@ -13,17 +13,15 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Log {
+public class SystemLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String type;
+    private String description;
+
+    @NonNull
     private Instant date = Instant.now();
 
-    public Log(String type) {
-        this.type = type;
-
-    }
 }

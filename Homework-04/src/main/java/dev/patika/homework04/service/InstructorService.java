@@ -2,7 +2,6 @@ package dev.patika.homework04.service;
 
 import dev.patika.homework04.dto.InstructorDTO;
 import dev.patika.homework04.entity.Instructor;
-import dev.patika.homework04.entity.Log;
 import dev.patika.homework04.exception.InstructorIsAlreadyExistException;
 import dev.patika.homework04.exception.InstructorIsNotExistException;
 import dev.patika.homework04.mappers.InstructorMapper;
