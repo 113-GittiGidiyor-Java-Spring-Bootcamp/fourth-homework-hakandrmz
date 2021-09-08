@@ -44,18 +44,23 @@ public class StudentController {
         return new ResponseEntity(studentDTO, HttpStatus.OK);
     }
 
+    /**
+     * method for adding student an existing course
+     * @param courseId
+     * @param studentDTO
+     * @return Student and couse info or throws an exception
+     */
     @PostMapping("student/add/{courseId}")
     public ResponseEntity<StudentDTO> addAStudentToAnExistingCourse(@PathVariable long courseId,
                                                                     @RequestBody StudentDTO studentDTO){
         studentService.addAStudentToAnExistingCourse(courseId,studentDTO);
-        return new ResponseEntity(String.format("Student with %d id added to %s",studentDTO.getId(),courseId), HttpStatus.OK);
+        return new ResponseEntity(String.format("Student Name: %s added to %d",studentDTO.getName(),courseId), HttpStatus.OK);
     }
 
     @GetMapping("students/search/{keyword}")
     public ResponseEntity<StudentDTO> searchStudent(@PathVariable String keyword){
         return new ResponseEntity(studentService.search(keyword),HttpStatus.OK);
     }
-
 }
 
 

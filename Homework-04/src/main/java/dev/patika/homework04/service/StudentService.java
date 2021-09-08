@@ -87,6 +87,10 @@ public class StudentService {
         }
     }
 
+    /**
+     * method for update an existing student in database
+     * @param studentDTO
+     */
     @Transactional
     public void update(StudentDTO studentDTO) {
         if(this.validateStudentAge(studentDTO)){
