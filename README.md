@@ -5,7 +5,7 @@
 
 # Folder Structure of Project
 
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/folderstructure.PNG?token=AFZA7JPIHN6OPE766QNHU2DBHCBDI)
+![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/folderstructure1.png?token=AFZA7JNXXZ5XOAKYE5XQQQ3BHCDN4)
 
 ## Checking Validations of Student Controller Class
 
