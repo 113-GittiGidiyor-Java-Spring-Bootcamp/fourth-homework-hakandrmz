@@ -46,10 +46,10 @@ Instructor phone number must be unique in database.
 
 Log Controller Endpoints
 
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/logcontrollerindatabase.PNG?token=AFZA7JJLKQYLZJBVFGG5C4DBHCBDM)
+![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/logcontrollerindatabase1.PNG?token=AFZA7JKNRJQEW2MTHZJ6BULBHCDFA)
 
 Searching in logs
-![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/logcontrollerindatabase1.PNG?token=AFZA7JKNRJQEW2MTHZJ6BULBHCDFA)
+
 ![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/searchinlogs1.png?token=AFZA7JMZIVC2ZYYP3NQF4M3BHCDFI)
 ![images](https://raw.githubusercontent.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz/main/Homework-04/src/main/resources/readmeimages/searchinlogsresult1.png?token=AFZA7JIUDPGAIIUOZPPEUO3BHCDFK)
 
