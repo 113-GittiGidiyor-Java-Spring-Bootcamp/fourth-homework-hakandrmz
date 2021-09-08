@@ -41,23 +41,23 @@ password: password
 - /utils      - error message constants
 
 # Controller Endpoints
-
+### Courses
 - POST    /api/course/add 
 - DELETE  /api/course/delete/{id}
 - PUT     /api/course/update
 - GET     /api/courses
 - GET     /api/courses/{id}
-
+### Logs
 - GET     /logs
 - GET     /logs/search/{keyword}
-
+### Students
 - POST    /api/student/add
 - POST    /api/student/add/{courseId} 
 - DELETE  /api/student/delete/{id}
 - PUT     /api/student/update
 - GET     /api/students
 - GET     /api/students/search/{keyword}
-
+### Instructors
 - POST    /api/instructor/add
 - DELETE  /api/instructor/delete/{id}
 - PUT     /api/instructor/update
