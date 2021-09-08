@@ -66,10 +66,10 @@ password: password
 
 # Rules of Project
 
-1. Student age must be greater than 18 and less than
+1. Student age must be greater than 18 and less than 40
 2. Number of students must be less than 20
 3. Instructor phone number must be unique
-4. Course code of course is must be unique
+4. Course code is must be unique
 
 
 
