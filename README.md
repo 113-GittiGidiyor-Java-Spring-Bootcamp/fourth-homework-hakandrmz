@@ -29,40 +29,40 @@ password: password
 
 # Folder Structure of Project
 
-/bootstrap  - load data on start
-/config     - swagger configs
-/controller - endpoints
-/dto        - data between layers
-/entity     - database models
-/exception  - specific exceptions
-/mappers    - dto to entity mapper
-/repository - for CrudRepository
-/service    - service layer between repository and controller 
-/utils      - error message constants
+- /bootstrap  - load data on start
+- /config     - swagger configs
+- /controller - endpoints
+- /dto        - data between layers
+- /entity     - database models
+- /exception  - specific exceptions
+- /mappers    - dto to entity mapper
+- /repository - for CrudRepository
+- /service    - service layer between repository and controller 
+- /utils      - error message constants
 
 # Controller Endpoints
 
-POST    /api/course/add 
-DELETE  /api/course/delete/{id}
-PUT     /api/course/update
-GET     /api/courses
-GET     /api/courses/{id}
+- POST    /api/course/add 
+- DELETE  /api/course/delete/{id}
+- PUT     /api/course/update
+- GET     /api/courses
+- GET     /api/courses/{id}
 
-GET     /logs
-GET     /logs/search/{keyword}
+- GET     /logs
+- GET     /logs/search/{keyword}
 
-POST    /api/student/add
-POST    /api/student/add/{courseId} 
-DELETE  /api/student/delete/{id}
-PUT     /api/student/update
-GET     /api/students
-GET     /api/students/search/{keyword}
+- POST    /api/student/add
+- POST    /api/student/add/{courseId} 
+- DELETE  /api/student/delete/{id}
+- PUT     /api/student/update
+- GET     /api/students
+- GET     /api/students/search/{keyword}
 
-POST    /api/instructor/add
-DELETE  /api/instructor/delete/{id}
-PUT     /api/instructor/update
-GET     /api/instructors
-GET     /api/instructors/{id}
+- POST    /api/instructor/add
+- DELETE  /api/instructor/delete/{id}
+- PUT     /api/instructor/update
+- GET     /api/instructors
+- GET     /api/instructors/{id}
 
 # Rules of Project
 
