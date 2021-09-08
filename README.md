@@ -2,13 +2,13 @@
 
 ![homework](https://user-images.githubusercontent.com/45206582/131386439-6727321a-5a50-4c20-9413-ea4013013434.PNG)
 
-#Installation and usage
+# Installation and usage
 
 1. git clone https://github.com/113-GittiGidiyor-Java-Spring-Bootcamp/fourth-homework-hakandrmz.git
 2. cd fourth-homework-hakandrmz/Homework-04
 3. mvn spring-boot:run
 
-#Testing endpoints
+# Testing endpoints
 
 http://localhost:8080/swagger-ui.html
 
